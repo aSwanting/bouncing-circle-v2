@@ -27,7 +27,7 @@ document.getElementById("circle-decrease").addEventListener("click", function ()
     }
 })
 
-// Increase circle count on click, minimum 1 circle
+// Increase circle count on click
 document.getElementById("circle-increase").addEventListener("click", function () {
 
     testBox.innerHTML = ""
