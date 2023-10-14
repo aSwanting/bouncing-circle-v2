@@ -9,6 +9,11 @@ testBox.append(testCircle)
 testBox.className = "test-box"
 testCircle.className = "test-circle"
 
+// Randomize circle size, border always 1/3 of size
+const circleSize = rand(20, 120)
+testCircle.style.width = circleSize + "px"
+testCircle.style.borderWidth = circleSize / 3 + "px"
+
 // Get circle radius
 const circleR = testCircle.offsetWidth / 2
 
