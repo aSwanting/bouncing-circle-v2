@@ -33,7 +33,7 @@ document.getElementById("circle-increase").addEventListener("click", function ()
 
 })
 
-// Create Circle DOM element
+// Initialize Circle DOM element
 function createCircle(circleCount) {
 
     for (let i = 0; i < circleCount; i++) {
@@ -46,6 +46,7 @@ function createCircle(circleCount) {
     }
 }
 
+// Position, shape and animate circles
 function animateCircle() {
     const circles = document.querySelectorAll(".test-circle")
     circles.forEach(testCircle => {
@@ -83,8 +84,8 @@ function animateCircle() {
         // Randomize circle direction and speed
         let circleLtoR = rand(0, 1)
         let circleTtoB = rand(0, 1)
-        const speedX = rand(5, 10)
-        const speedY = rand(5, 10)
+        const speedY = rand(5, 15)
+        const speedX = rand(5, 15)
 
         // Timing variables
         const fps = 60
