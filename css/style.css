@@ -74,6 +74,12 @@
     margin-top: -10px;
 }
 
+.counter-value {
+    font-size: 40px;
+    width: 50px;
+    text-align: center;
+}
+
 .circle-counter:hover {
     opacity: 0.5;
 }

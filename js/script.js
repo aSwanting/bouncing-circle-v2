@@ -4,11 +4,14 @@
 // DOM Variables, create testBox
 const appBody = document.querySelector(".app-body")
 const testBox = document.createElement("div")
+const circleCounter = document.getElementById("circle-counter")
+
 appBody.append(testBox)
 testBox.className = "test-box"
 
 // Spawn first circle
 let circleCount = 1
+circleCounter.innerHTML = circleCount
 createCircle(circleCount)
 animateCircle()
 
@@ -18,6 +21,7 @@ document.getElementById("circle-decrease").addEventListener("click", function ()
     if (circleCount > 1) {
         testBox.innerHTML = ""
         circleCount--
+        circleCounter.innerHTML = circleCount
         createCircle(circleCount)
         animateCircle()
     }
@@ -28,6 +32,7 @@ document.getElementById("circle-increase").addEventListener("click", function ()
 
     testBox.innerHTML = ""
     circleCount++
+    circleCounter.innerHTML = circleCount
     createCircle(circleCount)
     animateCircle()
 
