@@ -1,4 +1,5 @@
 .app {
+    background-color: rgb(44, 24, 114);
     height: 100vh;
     overflow: hidden;
     display: flex;
@@ -6,9 +7,10 @@
 }
 
 .app-body {
-    background-color: rgb(44, 24, 114);
+   
     flex-grow: 1;
     padding: 50px;
+    
 }
 
 .test-box {
@@ -31,9 +33,10 @@
 }
 
 .app-toolbar {
-    background-color: rgb(29, 51, 44);
     flex-shrink: 0;
-    padding: 50px;
+    text-align: center;
+    padding: 20px;
+    color: rgb(235, 23, 235);
 }
 
 
