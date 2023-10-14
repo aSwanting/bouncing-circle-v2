@@ -7,10 +7,10 @@
 }
 
 .app-body {
-   
+
     flex-grow: 1;
     padding: 50px;
-    
+
 }
 
 .test-box {
@@ -21,7 +21,7 @@
 }
 
 .test-circle {
-    border: 20px solid rgb(23, 193, 235);
+    border: 20px solid;
     position: absolute;
     top: 0;
     left: 0;
@@ -32,11 +32,32 @@
 
 }
 
+.color-01 {
+    color: rgb(23, 193, 235);
+}
+
+.color-02 {
+    color: rgb(23, 235, 76);
+}
+
+.color-03 {
+    color: rgb(235, 23, 94);
+}
+
+.color-04 {
+    color: rgb(221, 235, 23);
+}
+
+.color-05 {
+    color: rgb(248, 169, 23);
+}
+
 .app-toolbar {
     flex-shrink: 0;
     text-align: center;
     padding: 20px;
     color: rgb(235, 23, 235);
+    margin: 50px;
 }
 
 
@@ -44,10 +65,10 @@
 
 .debug .app-body {
     border: 3px solid red;
-    
+
 }
 
 .debug .app-toolbar {
     border: 3px solid green;
-    
+
 }
