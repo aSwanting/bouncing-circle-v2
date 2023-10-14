@@ -1,0 +1,50 @@
+.app {
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-body {
+    background-color: rgb(44, 24, 114);
+    flex-grow: 1;
+    padding: 50px;
+}
+
+.test-box {
+    outline: 10px solid rgb(235, 23, 235);
+    border-radius: 10px;
+    position: relative;
+    height: 100%;
+}
+
+.test-circle {
+    border: 20px solid rgb(23, 193, 235);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+
+}
+
+.app-toolbar {
+    background-color: rgb(29, 51, 44);
+    flex-shrink: 0;
+    padding: 50px;
+}
+
+
+/* DEBUG */
+
+.debug .app-body {
+    border: 3px solid red;
+    
+}
+
+.debug .app-toolbar {
+    border: 3px solid green;
+    
+}
