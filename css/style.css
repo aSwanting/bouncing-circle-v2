@@ -64,12 +64,8 @@
 
 .circle-counter {
     margin: 0 50px;
-    color: inherit;
-    border-color: inherit;
     font-weight: bold;
     font-size: 50px;
-    cursor: pointer;
-    transition: 200ms all;
     display: inline-block;
     margin-top: -10px;
 }
@@ -80,7 +76,12 @@
     text-align: center;
 }
 
-.circle-counter:hover {
+.counter-button {
+    cursor: pointer;
+    transition: 200ms all;
+}
+
+.counter-button:hover {
     opacity: 0.5;
 }
 
