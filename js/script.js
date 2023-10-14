@@ -10,7 +10,7 @@ testBox.className = "test-box"
 testCircle.className = "test-circle"
 
 // Randomize circle size, border always 1/3 of size
-const circleSize = rand(20, 120)
+const circleSize = rand(60, 120)
 testCircle.style.width = circleSize + "px"
 testCircle.style.borderWidth = circleSize / 3 + "px"
 
@@ -44,27 +44,27 @@ const speedY = rand(5, 15)
 // Timing variables
 const fps = 60
 const frameInterval = 1000 / fps
-let previouTime = performance.now()
-let delaTimeMultiplier = 1
+let previousTime = performance.now()
+let deltaTimeMultiplier = 1
 let deltaTime = 0
 
 // Animation Function
 function moveCircle(currentTime) {
 
     // Calculate DeltaTime and DeltaTimeMultiplier
-    deltaTime = currentTime - previouTime
-    delaTimeMultiplier = deltaTime / frameInterval
+    deltaTime = currentTime - previousTime
+    deltaTimeMultiplier = deltaTime / frameInterval
 
     // Give circle horizontal direction and speed
-    circleX < rightBound && circleLtoR ? circleX += speedX * delaTimeMultiplier : circleLtoR = false
-    circleX > leftBound && !circleLtoR ? circleX -= speedX * delaTimeMultiplier : circleLtoR = true
+    circleX < rightBound && circleLtoR ? circleX += speedX * deltaTimeMultiplier : circleLtoR = false
+    circleX > leftBound && !circleLtoR ? circleX -= speedX * deltaTimeMultiplier : circleLtoR = true
 
     // Give circle vertical direction and speed
-    circleY < bottomBound && circleTtoB ? circleY += speedY * delaTimeMultiplier : circleTtoB = false
-    circleY > topBound && !circleTtoB ? circleY -= speedY * delaTimeMultiplier : circleTtoB = true
+    circleY < bottomBound && circleTtoB ? circleY += speedY * deltaTimeMultiplier : circleTtoB = false
+    circleY > topBound && !circleTtoB ? circleY -= speedY * deltaTimeMultiplier : circleTtoB = true
 
     // Update animation time
-    previouTime = currentTime
+    previousTime = currentTime
 
     // Move circle
     testCircle.style.left = circleX + "px"
