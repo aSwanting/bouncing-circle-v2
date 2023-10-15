@@ -153,7 +153,6 @@ function animateCircle() {
             circleY < bottomBound && circleTtoB ? circleY += speedY * deltaTimeMultiplier : circleTtoB = false
             circleY > topBound && !circleTtoB ? circleY -= speedY * deltaTimeMultiplier : circleTtoB = true
 
-
             // Obstacle collision top
             if (circleTtoB
                 && circleY > obstacleTopBound
