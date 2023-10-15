@@ -72,8 +72,8 @@ function createObstacle() {
     obstacle.id = "obstacle"
     obstacle.style.left = rand(0, 100) + "%"
     obstacle.style.top = rand(0, 100) + "%"
-    obstacle.style.width = rand(0, 100) + "%"
-    obstacle.style.height = rand(0, 100) + "%"
+    obstacle.style.width = rand(1, 80) + "%"
+    obstacle.style.height = rand(1, 80) + "%"
 
 }
 
@@ -98,7 +98,7 @@ function animateCircle() {
         let rightBound = testBox.offsetWidth - circleR
         let bottomBound = testBox.offsetHeight - circleR
 
-        // // Update boundaries on window resize
+        // Update boundaries on window resize
         window.addEventListener("resize", function () {
             leftBound = circleR
             topBound = circleR
@@ -118,7 +118,7 @@ function animateCircle() {
         const speedY = rand(2, 15)
         const speedX = rand(2, 15)
 
-        // Obstacle Section
+        // Obstacle coordinates and boundaries
         const obstacle = document.getElementById("obstacle")
         const obstacleRX = obstacle.offsetWidth / 2
         const obstacleRY = obstacle.offsetHeight / 2
@@ -161,6 +161,8 @@ function animateCircle() {
                 && circleX <= obstacleRightBound) {
 
                 circleTtoB = !circleTtoB
+                hit < 5 ? hit++ : hit = 1
+                colorSwitch(hit)
             }
 
             // Obstacle collision bottom
@@ -171,6 +173,8 @@ function animateCircle() {
                 && circleX <= obstacleRightBound) {
 
                 circleTtoB = !circleTtoB
+                hit < 5 ? hit++ : hit = 1
+                colorSwitch(hit)
             }
 
             // Obstacle collision left
@@ -181,6 +185,8 @@ function animateCircle() {
                 && circleY <= obstacleBottomBound) {
 
                 circleLtoR = !circleLtoR
+                hit < 5 ? hit++ : hit = 1
+                colorSwitch(hit)
             }
 
             // Obstacle collision right
@@ -191,6 +197,8 @@ function animateCircle() {
                 && circleY <= obstacleBottomBound) {
 
                 circleLtoR = !circleLtoR
+                hit < 5 ? hit++ : hit = 1
+                colorSwitch(hit)
             }
 
             // Move circle
