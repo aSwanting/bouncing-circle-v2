@@ -34,6 +34,7 @@
     border-radius: 10px;
     position: relative;
     height: 100%;
+    overflow: hidden;
 }
 
 /* Circle Style */
@@ -78,12 +79,11 @@
 
 .obstacle {
     background-color: var(--primary-color);
+    border-radius: 5px;
     position: absolute;
-    border-radius: 5%;
-    top: 50px;
-    left: 50px;
-    width: 100px;
-    height: 100px;
+    width: 300px;
+    height: 200px;
+    transform: translate(-50%, -50%);
 }
 
 /* App Toolbar */
@@ -104,13 +104,17 @@
     font-size: 40px;
 }
 
-.toolbar-controls * :not(.circle-value) {
+.toolbar-controls * :not(.counter-value) {
     cursor: pointer;
     transition: 200ms all;
 }
 
-.toolbar-controls * :not(.circle-value):hover {
+.toolbar-controls * :not(.counter-value):hover {
     color: var(--hover-color);
+}
+
+.counter-value {
+    width: 50px;
 }
 
 /* DEBUG */

@@ -12,6 +12,7 @@ testBox.className = "test-box"
 let circleCount = 1
 circleCounter.innerHTML = circleCount
 createCircle(circleCount)
+createObstacle()
 animateCircle()
 
 // Decrease circle count on click, minimum 1 circle
@@ -22,6 +23,7 @@ document.getElementById("circle-decrease").addEventListener("click", function ()
         circleCount--
         circleCounter.innerHTML = circleCount
         createCircle(circleCount)
+        createObstacle()
         animateCircle()
     }
 })
@@ -33,6 +35,7 @@ document.getElementById("circle-increase").addEventListener("click", function ()
     circleCount++
     circleCounter.innerHTML = circleCount
     createCircle(circleCount)
+    createObstacle()
     animateCircle()
 
 })
@@ -42,6 +45,7 @@ document.getElementById("circle-reload").addEventListener("click", function () {
 
     testBox.innerHTML = ""
     createCircle(circleCount)
+    createObstacle()
     animateCircle()
 
 })
@@ -65,8 +69,13 @@ function createObstacle() {
     const obstacle = document.createElement("div")
     testBox.append(obstacle)
     obstacle.className = "obstacle"
-}
+    obstacle.id = "obstacle"
+    obstacle.style.left = rand(0, 100) + "%"
+    obstacle.style.top = rand(0, 100) + "%"
+    obstacle.style.width = rand(0, 100) + "%"
+    obstacle.style.height = rand(0, 100) + "%"
 
+}
 
 // Position, shape and animate circles
 function animateCircle() {
@@ -106,8 +115,17 @@ function animateCircle() {
         // Randomize circle direction and speed
         let circleLtoR = rand(0, 1)
         let circleTtoB = rand(0, 1)
-        const speedY = rand(5, 15)
-        const speedX = rand(5, 15)
+        const speedY = rand(2, 15)
+        const speedX = rand(2, 15)
+
+        // Obstacle Section
+        const obstacle = document.getElementById("obstacle")
+        const obstacleRX = obstacle.offsetWidth / 2
+        const obstacleRY = obstacle.offsetHeight / 2
+        let obstacleLeftBound = (obstacle.offsetLeft - obstacleRX) - circleR
+        let obstacleTopBound = (obstacle.offsetTop - obstacleRY) - circleR
+        let obstacleRightBound = (obstacle.offsetLeft + obstacleRX) + circleR
+        let obstacleBottomBound = (obstacle.offsetTop + obstacleRY) + circleR
 
         // Timing variables
         const fps = 60
@@ -127,13 +145,54 @@ function animateCircle() {
             deltaTime = currentTime - previousTime
             deltaTimeMultiplier = deltaTime / frameInterval
 
-            // Give circle horizontal direction and speed
+            // Give circle horizontal direction and speed, reverse on boundary collision
             circleX < rightBound && circleLtoR ? circleX += speedX * deltaTimeMultiplier : circleLtoR = false
             circleX > leftBound && !circleLtoR ? circleX -= speedX * deltaTimeMultiplier : circleLtoR = true
 
-            // Give circle vertical direction and speed
+            // Give circle vertical direction and speed, reverse on boundary collision
             circleY < bottomBound && circleTtoB ? circleY += speedY * deltaTimeMultiplier : circleTtoB = false
             circleY > topBound && !circleTtoB ? circleY -= speedY * deltaTimeMultiplier : circleTtoB = true
+
+
+            // Obstacle collision top
+            if (circleTtoB
+                && circleY > obstacleTopBound
+                && circleY < obstacleTopBound + 10
+                && circleX >= obstacleLeftBound
+                && circleX <= obstacleRightBound) {
+
+                circleTtoB = !circleTtoB
+            }
+
+            // Obstacle collision bottom
+            if (!circleTtoB
+                && circleY < obstacleBottomBound
+                && circleY > obstacleBottomBound - 10
+                && circleX >= obstacleLeftBound
+                && circleX <= obstacleRightBound) {
+
+                circleTtoB = !circleTtoB
+            }
+
+            // Obstacle collision left
+            if (circleLtoR
+                && circleX > obstacleLeftBound
+                && circleX < obstacleLeftBound + 10
+                && circleY >= obstacleTopBound
+                && circleY <= obstacleBottomBound) {
+
+                circleLtoR = !circleLtoR
+            }
+
+            // Obstacle collision right
+            if (!circleLtoR
+                && circleX < obstacleRightBound
+                && circleX > obstacleRightBound - 10
+                && circleY >= obstacleTopBound
+                && circleY <= obstacleBottomBound) {
+
+                circleLtoR = !circleLtoR
+            }
 
             // Move circle
             testCircle.style.left = circleX + "px"
