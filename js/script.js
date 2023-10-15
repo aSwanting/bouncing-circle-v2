@@ -5,7 +5,6 @@
 const appBody = document.querySelector(".app-body")
 const testBox = document.createElement("div")
 const circleCounter = document.getElementById("circle-counter")
-
 appBody.append(testBox)
 testBox.className = "test-box"
 
@@ -38,6 +37,15 @@ document.getElementById("circle-increase").addEventListener("click", function ()
 
 })
 
+// Reload circles with current circle count
+circleCounter.addEventListener("click", function () {
+
+    testBox.innerHTML = ""
+    createCircle(circleCount)
+    animateCircle()
+
+})
+
 // Initialize Circle DOM element
 function createCircle(circleCount) {
 
@@ -50,6 +58,15 @@ function createCircle(circleCount) {
 
     }
 }
+
+// Create Obstacle
+function createObstacle() {
+
+    const obstacle = document.createElement("div")
+    testBox.append(obstacle)
+    obstacle.className = "obstacle"
+}
+
 
 // Position, shape and animate circles
 function animateCircle() {
