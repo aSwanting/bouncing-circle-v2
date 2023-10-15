@@ -1,3 +1,5 @@
+/* Variables */
+
 :root {
     --bg-color: rgb(44, 24, 114);
     --primary-color: rgb(235, 23, 235);
@@ -10,6 +12,7 @@
     --circle-color-05: rgba(255, 137, 101, 0.8);
 }
 
+/* App Layout */
 
 .app {
     background-color: var(--bg-color);
@@ -24,6 +27,8 @@
     padding: 50px;
 }
 
+/* Test box Style */
+
 .test-box {
     outline: 10px solid var(--primary-color);
     border-radius: 10px;
@@ -31,15 +36,7 @@
     height: 100%;
 }
 
-.obstacle {
-    background-color: var(--primary-color);
-    position: absolute;
-    border-radius: 5%;
-    top: 50px;
-    left: 50px;
-    width: 100px;
-    height: 100px;
-}
+/* Circle Style */
 
 .test-circle {
     border: solid;
@@ -77,44 +74,57 @@
 }
 
 
+/* Obstacle Style */
 
+.obstacle {
+    background-color: var(--primary-color);
+    position: absolute;
+    border-radius: 5%;
+    top: 50px;
+    left: 50px;
+    width: 100px;
+    height: 100px;
+}
+
+/* App Toolbar */
 
 .app-toolbar {
     flex-shrink: 0;
     text-align: center;
     color: var(--primary-color);
-    margin-bottom: 20px;
     user-select: none;
+    padding-bottom: 30px;
 }
 
-.circle-counter {
-    margin: 0 50px;
+.toolbar-controls {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
     font-weight: bold;
-    font-size: 50px;
-    display: inline-block;
-    margin-top: -10px;
+    font-size: 40px;
+}
+
+.toolbar-controls * :not(.circle-value) {
     cursor: pointer;
     transition: 200ms all;
 }
 
-.counter-value {
-    font-size: 40px;
-    width: 50px;
-    text-align: center;
-}
-
-.circle-counter:hover {
+.toolbar-controls * :not(.circle-value):hover {
     color: var(--hover-color);
 }
 
 /* DEBUG */
 
 .debug .app-body {
-    border: 3px solid red;
+    border: 3px solid rgb(255, 127, 127);
 
 }
 
 .debug .app-toolbar {
-    border: 3px solid green;
+    border: 3px solid rgb(115, 228, 115);
 
+}
+
+.debug .app-toolbar > * {
+    border: 3px solid rgb(158, 255, 158);
 }

@@ -38,7 +38,7 @@ document.getElementById("circle-increase").addEventListener("click", function ()
 })
 
 // Reload circles with current circle count
-circleCounter.addEventListener("click", function () {
+document.getElementById("circle-reload").addEventListener("click", function () {
 
     testBox.innerHTML = ""
     createCircle(circleCount)
