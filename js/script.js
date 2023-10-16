@@ -180,7 +180,7 @@ function animateCircle() {
 
 
         // Timing variables
-        const fps = 60
+        const fps = 30
         const frameInterval = 1000 / fps
         let previousTime = performance.now()
         let deltaTimeMultiplier = 1
