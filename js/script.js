@@ -26,7 +26,6 @@ document.getElementById("circle-decrease").addEventListener("click", function ()
         circleCount--
         circleCounter.innerHTML = circleCount
         createCircle(circleCount)
-        createObstacle()
         animateCircle()
     }
 })
@@ -40,7 +39,6 @@ document.getElementById("circle-increase").addEventListener("click", function ()
     circleCount++
     circleCounter.innerHTML = circleCount
     createCircle(circleCount)
-    // createObstacle()
     animateCircle()
 
 })
@@ -84,24 +82,106 @@ function createObstacle() {
     obstacle.append(obstacleDebug)
     obstacleDebug.className = "obstacle-debug"
 
-
     // Obstacle controls
-    document.getElementById("arrow-left").addEventListener("click", function () {
-        obstacle.style.left = obstacle.offsetLeft - 30 + "px"
+    let animReq
+    let direction = null
+
+    // Move left
+    document.getElementById("arrow-left").addEventListener("mousedown", function () {
+        direction = "left"
+    })
+    document.getElementById("arrow-left").addEventListener("mouseup", function () {
+        direction = null
     })
 
-    document.getElementById("arrow-right").addEventListener("click", function () {
-        obstacle.style.left = obstacle.offsetLeft + 30 + "px"
+    // Move up
+    document.getElementById("arrow-up").addEventListener("mousedown", function () {
+        direction = "up"
+    })
+    document.getElementById("arrow-up").addEventListener("mouseup", function () {
+        direction = null
     })
 
-    document.getElementById("arrow-up").addEventListener("click", function () {
-        obstacle.style.top = obstacle.offsetTop - 30 + "px"
+    // Move right
+    document.getElementById("arrow-right").addEventListener("mousedown", function () {
+        direction = "right"
+    })
+    document.getElementById("arrow-right").addEventListener("mouseup", function () {
+        direction = null
     })
 
-    document.getElementById("arrow-down").addEventListener("click", function () {
-        obstacle.style.top = obstacle.offsetTop + 30 + "px"
+    // Move down
+    document.getElementById("arrow-down").addEventListener("mousedown", function () {
+        direction = "down"
+    })
+    document.getElementById("arrow-down").addEventListener("mouseup", function () {
+        direction = null
     })
 
+    document.addEventListener('keydown', function (event) {
+
+        if (event.key === "ArrowLeft") {
+            direction = "left"
+        }
+
+        if (event.key === "ArrowUp") {
+            direction = "up"
+        }
+
+        if (event.key === "ArrowRight") {
+            direction = "right"
+        }
+
+        if (event.key === "ArrowDown") {
+            direction = "down"
+        }
+
+    });
+
+    document.addEventListener('keyup', function (event) {
+
+        if (event.key === "ArrowLeft"
+            || event.key === "ArrowUp"
+            || event.key === "ArrowRight"
+            || event.key === "ArrowDown") {
+
+            direction = null
+
+        }
+    })
+
+    // move along X axis
+    function moveObstacleX(distance) {        
+        obstacle.style.left = obstacle.offsetLeft + distance + "px"      
+    }
+
+    // move along Y axis
+    function moveObstacleY(distance) {
+        obstacle.style.top = obstacle.offsetTop + distance + "px"
+    }    
+
+    function animateObstacle() {    
+
+        if (direction === "left") {
+            moveObstacleX((-2))
+        }
+
+        if (direction === "right") {
+            moveObstacleX(2)
+        }
+
+        if (direction === "up") {
+            moveObstacleY(-2)
+        }
+
+        if (direction === "down") {
+            moveObstacleY(2)
+        }
+
+        requestAnimationFrame(animateObstacle)
+    }
+
+    requestAnimationFrame(animateObstacle)
 
 }
 
@@ -140,13 +220,28 @@ function animateCircle() {
         // Update obstacle boundaries on arrow press
         const arrows = document.querySelectorAll(".arrow")
         arrows.forEach(function (arrow) {
-            arrow.addEventListener("click", updateObstacleBoundaries)
+            arrow.addEventListener("mousedown", function () {
+                let interval = setInterval(() => { updateObstacleBoundaries() }, 10);
+                this.addEventListener("mouseup", function () { clearInterval(interval) })
+            })
         })
 
-        // Update boundaries on window resize
-        window.addEventListener("resize", function () {   
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "ArrowLeft"
+                || event.key === "ArrowUp"
+                || event.key === "ArrowRight"
+                || event.key === "ArrowDown") {
 
-            updateTestBoxBoudaries()       
+                let interval = setInterval(() => { updateObstacleBoundaries() }, 10);
+                this.addEventListener("keyup", function () { clearInterval(interval) })
+            }
+        });
+
+
+        // Update boundaries on window resize
+        window.addEventListener("resize", function () {
+
+            updateTestBoxBoudaries()
             updateObstacleBoundaries()
 
         })
