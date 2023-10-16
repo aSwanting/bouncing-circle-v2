@@ -94,26 +94,50 @@
     text-align: center;
     color: var(--primary-color);
     user-select: none;
-    padding-bottom: 30px;
+    padding: 0 50px 40px 50px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.obstacle-controls {
-    width: 80px;
+.toolbar-controls {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.counter-value {
+    margin-inline: 2%;
+    width: 40px;
+}
+
+.obstacle-controls,
+.circle-reload {
+    flex-basis: 30%;
+}
+
+.control-base {
+    width: 100%;
+    max-width: 60px;
     aspect-ratio: 1;
     border: 1px solid;
     border-radius: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    left: 12%;
-    top: 38%;
+    position: relative;
+    font-size: 20px;
 }
 
 .arrow {
     color: var(--bg-color);
     overflow: hidden;
-    width: 22px;
+    width: 100%;
+    max-width: 20px;
     aspect-ratio: 1;
+    font-size: 15px;
     background-color: var(--primary-color);
     border-radius: 50%;
     position: absolute;
@@ -149,26 +173,16 @@
     top: 100%
 }
 
-.toolbar-controls {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    font-weight: bold;
-    font-size: 40px;
-}
 
-.toolbar-controls * :not(.counter-value) {
+.toolbar-controls .button {
     cursor: pointer;
     transition: 200ms all;
 }
 
-.toolbar-controls * :not(.counter-value):hover {
+.toolbar-controls .circle-counter.button:hover {
     color: var(--hover-color);
 }
 
-.counter-value {
-    width: 50px;
-}
 
 /* DEBUG */
 

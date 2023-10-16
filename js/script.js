@@ -140,30 +140,15 @@ function animateCircle() {
         // Update obstacle boundaries on arrow press
         const arrows = document.querySelectorAll(".arrow")
         arrows.forEach(function (arrow) {
-            arrow.addEventListener("click", function () {
-                obstacleLeftBound = (obstacle.offsetLeft - obstacleRX) - circleR
-                obstacleTopBound = (obstacle.offsetTop - obstacleRY) - circleR
-                obstacleRightBound = (obstacle.offsetLeft + obstacleRX) + circleR
-                obstacleBottomBound = (obstacle.offsetTop + obstacleRY) + circleR
-            })
+            arrow.addEventListener("click", updateObstacleBoundaries)
         })
 
         // Update boundaries on window resize
-        window.addEventListener("resize", function () {
+        window.addEventListener("resize", function () {   
 
-            // testBox
-            leftBound = circleR
-            topBound = circleR
-            rightBound = testBox.offsetWidth - circleR
-            bottomBound = testBox.offsetHeight - circleR
+            updateTestBoxBoudaries()       
+            updateObstacleBoundaries()
 
-            // obstacle
-            let obstacleRX = obstacle.offsetWidth / 2
-            let obstacleRY = obstacle.offsetHeight / 2
-            obstacleLeftBound = (obstacle.offsetLeft - obstacleRX) - circleR
-            obstacleTopBound = (obstacle.offsetTop - obstacleRY) - circleR
-            obstacleRightBound = (obstacle.offsetLeft + obstacleRX) + circleR
-            obstacleBottomBound = (obstacle.offsetTop + obstacleRY) + circleR
         })
 
         // Randomize circle spawn location within boundaries
@@ -277,16 +262,34 @@ function animateCircle() {
         // Run animation
         window.requestAnimationFrame(moveCircle)
 
-        // color change Function
+        // Color change function
         function colorSwitch(colorNum) {
             testCircle.className = "test-circle color-0" + colorNum
+        }
+
+        // Obstacle boundary update function
+        function updateObstacleBoundaries() {
+            obstacleRX = obstacle.offsetWidth / 2
+            obstacleRY = obstacle.offsetHeight / 2
+            obstacleLeftBound = (obstacle.offsetLeft - obstacleRX) - circleR
+            obstacleTopBound = (obstacle.offsetTop - obstacleRY) - circleR
+            obstacleRightBound = (obstacle.offsetLeft + obstacleRX) + circleR
+            obstacleBottomBound = (obstacle.offsetTop + obstacleRY) + circleR
+        }
+
+        // TestBox boundary update funtion
+        function updateTestBoxBoudaries() {
+            leftBound = circleR
+            topBound = circleR
+            rightBound = testBox.offsetWidth - circleR
+            bottomBound = testBox.offsetHeight - circleR
         }
 
     })
 
 }
 
-// Math Random Function
+// Math Random function
 function rand(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
