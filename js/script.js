@@ -19,7 +19,10 @@ animateCircle()
 document.getElementById("circle-decrease").addEventListener("click", function () {
 
     if (circleCount > 1) {
-        testBox.innerHTML = ""
+
+        document.querySelectorAll(".test-circle")
+            .forEach(function (circle) { circle.remove(circle) })
+
         circleCount--
         circleCounter.innerHTML = circleCount
         createCircle(circleCount)
@@ -31,11 +34,13 @@ document.getElementById("circle-decrease").addEventListener("click", function ()
 // Increase circle count on click
 document.getElementById("circle-increase").addEventListener("click", function () {
 
-    testBox.innerHTML = ""
+    document.querySelectorAll(".test-circle")
+        .forEach(function (circle) { circle.remove(circle) })
+
     circleCount++
     circleCounter.innerHTML = circleCount
     createCircle(circleCount)
-    createObstacle()
+    // createObstacle()
     animateCircle()
 
 })
@@ -63,7 +68,7 @@ function createCircle(circleCount) {
     }
 }
 
-// Create Obstacle
+// Create Obstacle, add controls
 function createObstacle() {
 
     const obstacle = document.createElement("div")
@@ -72,8 +77,31 @@ function createObstacle() {
     obstacle.id = "obstacle"
     obstacle.style.left = rand(0, 100) + "%"
     obstacle.style.top = rand(0, 100) + "%"
-    obstacle.style.width = rand(1, 80) + "%"
-    obstacle.style.height = rand(1, 80) + "%"
+    obstacle.style.width = rand(10, 60) + "%"
+    obstacle.style.height = rand(10, 60) + "%"
+
+    const obstacleDebug = document.createElement("div")
+    obstacle.append(obstacleDebug)
+    obstacleDebug.className = "obstacle-debug"
+
+
+    // Obstacle controls
+    document.getElementById("arrow-left").addEventListener("click", function () {
+        obstacle.style.left = obstacle.offsetLeft - 30 + "px"
+    })
+
+    document.getElementById("arrow-right").addEventListener("click", function () {
+        obstacle.style.left = obstacle.offsetLeft + 30 + "px"
+    })
+
+    document.getElementById("arrow-up").addEventListener("click", function () {
+        obstacle.style.top = obstacle.offsetTop - 30 + "px"
+    })
+
+    document.getElementById("arrow-down").addEventListener("click", function () {
+        obstacle.style.top = obstacle.offsetTop + 30 + "px"
+    })
+
 
 }
 
@@ -92,18 +120,50 @@ function animateCircle() {
         // Get circle radius
         const circleR = testCircle.offsetWidth / 2
 
+        // Get obstacle radius
+        const obstacle = document.getElementById("obstacle")
+        let obstacleRX = obstacle.offsetWidth / 2
+        let obstacleRY = obstacle.offsetHeight / 2
+
         // Initialize boundaries
         let leftBound = circleR
         let topBound = circleR
         let rightBound = testBox.offsetWidth - circleR
         let bottomBound = testBox.offsetHeight - circleR
 
+        // Obstacle boundaries
+        let obstacleLeftBound = (obstacle.offsetLeft - obstacleRX) - circleR
+        let obstacleTopBound = (obstacle.offsetTop - obstacleRY) - circleR
+        let obstacleRightBound = (obstacle.offsetLeft + obstacleRX) + circleR
+        let obstacleBottomBound = (obstacle.offsetTop + obstacleRY) + circleR
+
+        // Update obstacle boundaries on arrow press
+        const arrows = document.querySelectorAll(".arrow")
+        arrows.forEach(function (arrow) {
+            arrow.addEventListener("click", function () {
+                obstacleLeftBound = (obstacle.offsetLeft - obstacleRX) - circleR
+                obstacleTopBound = (obstacle.offsetTop - obstacleRY) - circleR
+                obstacleRightBound = (obstacle.offsetLeft + obstacleRX) + circleR
+                obstacleBottomBound = (obstacle.offsetTop + obstacleRY) + circleR
+            })
+        })
+
         // Update boundaries on window resize
         window.addEventListener("resize", function () {
+
+            // testBox
             leftBound = circleR
             topBound = circleR
             rightBound = testBox.offsetWidth - circleR
             bottomBound = testBox.offsetHeight - circleR
+
+            // obstacle
+            let obstacleRX = obstacle.offsetWidth / 2
+            let obstacleRY = obstacle.offsetHeight / 2
+            obstacleLeftBound = (obstacle.offsetLeft - obstacleRX) - circleR
+            obstacleTopBound = (obstacle.offsetTop - obstacleRY) - circleR
+            obstacleRightBound = (obstacle.offsetLeft + obstacleRX) + circleR
+            obstacleBottomBound = (obstacle.offsetTop + obstacleRY) + circleR
         })
 
         // Randomize circle spawn location within boundaries
@@ -115,17 +175,9 @@ function animateCircle() {
         // Randomize circle direction and speed
         let circleLtoR = rand(0, 1)
         let circleTtoB = rand(0, 1)
-        const speedY = rand(2, 15)
-        const speedX = rand(2, 15)
+        const speedY = rand(5, 25)
+        const speedX = rand(5, 25)
 
-        // Obstacle coordinates and boundaries
-        const obstacle = document.getElementById("obstacle")
-        const obstacleRX = obstacle.offsetWidth / 2
-        const obstacleRY = obstacle.offsetHeight / 2
-        let obstacleLeftBound = (obstacle.offsetLeft - obstacleRX) - circleR
-        let obstacleTopBound = (obstacle.offsetTop - obstacleRY) - circleR
-        let obstacleRightBound = (obstacle.offsetLeft + obstacleRX) + circleR
-        let obstacleBottomBound = (obstacle.offsetTop + obstacleRY) + circleR
 
         // Timing variables
         const fps = 60

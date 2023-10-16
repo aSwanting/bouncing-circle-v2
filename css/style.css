@@ -84,6 +84,7 @@
     width: 300px;
     height: 200px;
     transform: translate(-50%, -50%);
+    padding: 10px;
 }
 
 /* App Toolbar */
@@ -94,6 +95,58 @@
     color: var(--primary-color);
     user-select: none;
     padding-bottom: 30px;
+    position: relative;
+}
+
+.obstacle-controls {
+    width: 80px;
+    aspect-ratio: 1;
+    border: 1px solid;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 12%;
+    top: 38%;
+}
+
+.arrow {
+    color: var(--bg-color);
+    overflow: hidden;
+    width: 22px;
+    aspect-ratio: 1;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: 200ms all;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow:hover {
+    background-color: var(--hover-color);
+}
+
+.arrow.left {
+    left: 0;
+    top: 50%;
+}
+
+.arrow.up {
+    left: 50%;
+    top: 0
+}
+
+.arrow.right {
+    left: 100%;
+    top: 50%
+}
+
+.arrow.down {
+    left: 50%;
+    top: 100%
 }
 
 .toolbar-controls {
@@ -129,6 +182,13 @@
 
 }
 
-.debug .app-toolbar > * {
+.debug .app-toolbar>* {
     border: 3px solid rgb(158, 255, 158);
+}
+
+.debug .obstacle-debug {
+    background-color: var(--hover-color);
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
 }
